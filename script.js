@@ -144,3 +144,26 @@ decimalButton.addEventListener("click", () => {
     updateText();
   }
 });
+
+// reference delete button
+// check in order: second number, operator, first number
+// if decimal point is deleted, set flag to false
+// either use Number.isInteger(Number(num)) or check if deleted character is a '.'
+// first method might result in multiple decimal points
+
+const deleteButton = document.querySelector('#delete')
+deleteButton.addEventListener('click', () => {
+    if (secondNumber) {
+        const lastChar = secondNumber.at(-1)
+        lastChar === '.'? isFloat = false : isFloat = true
+        secondNumber = secondNumber.slice(0, -1)
+    } else if (operator) {
+        operator = ''
+        firstNumber.includes('.')? isFloat = true : isFloat = false
+    } else if(firstNumber) {
+        const lastChar = firstNumber.at(-1)
+        lastChar === '.'? isFloat = false : isFloat = true
+        firstNumber = firstNumber.slice(0, -1)
+    }
+    updateText()
+})
