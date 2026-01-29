@@ -18,23 +18,30 @@ function divide(a, b) {
 const DIVIDE_BY_0_MSG = "SNEAKY SNEAKY";
 // operate function takes an operator and two numbers and calls the correct operation
 function operate(a, b, operator) {
-  a = parseInt(a);
-  b = parseInt(b);
+  a = Number(a);
+  b = Number(b);
+  let res;
   switch (operator) {
     case "+":
-      return add(a, b);
+      res = add(a, b);
+      break;
     case "-":
-      return subtract(a, b);
+      res = subtract(a, b);
+      break;
     case "*":
-      return multiply(a, b);
+      res = multiply(a, b);
+      break;
     case "/":
       if (b === 0) {
         return DIVIDE_BY_0_MSG;
       }
-      return divide(a, b);
+      res = divide(a, b);
+      break;
     default:
-      return a;
+      res = a;
+      break;
   }
+  return String(+res.toFixed(5))
 }
 
 // variables for first number, second number and operator
@@ -83,6 +90,7 @@ operatorButtons.forEach((button) => {
       }
     }
     operator = button.textContent;
+    isFloat = false;
     updateText();
   });
 });
@@ -98,7 +106,7 @@ clearButton.addEventListener("click", () => {
 // equal button should call operate function and display the result
 const equalButton = document.querySelector("#equal");
 equalButton.addEventListener("click", () => {
-  if (!firstNumber || !secondNumber || !operator) return;
+  if (firstNumber === '' || secondNumber === '' || operator === '') return;
 
   const res = operate(firstNumber, secondNumber, operator);
   firstNumber = "";
@@ -119,3 +127,20 @@ equalButton.addEventListener("click", () => {
 // instead of appending the digit to the existing result. Check whether this is the case on your calculator!
 
 // Pressing = before entering all of the numbers or an operator could cause problems!
+
+let isFloat = false;
+const decimalButton = document.querySelector("#decimal");
+decimalButton.addEventListener("click", () => {
+  if (!isFloat) {
+    // first number
+    !operatorPressed
+      ? firstNumber
+        ? (firstNumber += ".")
+        : (firstNumber = "0.")
+      : secondNumber
+        ? (secondNumber += ".")
+        : (secondNumber = "0.");
+    isFloat = true;
+    updateText();
+  }
+});
