@@ -97,9 +97,7 @@ operatorButtons.forEach((button) => {
 
 const clearButton = document.querySelector("#clear");
 clearButton.addEventListener("click", () => {
-  firstNumber = "";
-  secondNumber = "";
-  operator = "";
+  reset()
   display.textContent = "Cleared!";
 });
 
@@ -109,10 +107,7 @@ equalButton.addEventListener("click", () => {
   if (firstNumber === '' || secondNumber === '' || operator === '') return;
 
   const res = operate(firstNumber, secondNumber, operator);
-  firstNumber = "";
-  secondNumber = "";
-  operator = "";
-  operatorPressed = false;
+  reset();
   display.textContent = res;
 });
 
@@ -167,3 +162,11 @@ deleteButton.addEventListener('click', () => {
     }
     updateText()
 })
+
+function reset() {
+  firstNumber = "";
+  secondNumber = "";
+  operator = "";
+  operatorPressed = false;
+  isFloat = false;
+}
