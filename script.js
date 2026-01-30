@@ -85,7 +85,6 @@ operatorButtons.forEach((button) => {
 const clearButton = document.querySelector("#clear");
 clearButton.addEventListener("click", () => {
   reset();
-  display.textContent = "Cleared!";
 });
 
 const equalButton = document.querySelector("#equal");
@@ -135,4 +134,5 @@ function reset() {
   operator = "";
   operatorPressed = false;
   isFloat = false;
+  display.textContent = '0'
 }
