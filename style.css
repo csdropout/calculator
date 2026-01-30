@@ -40,11 +40,13 @@ button.big {
 }
 
 #display {
-    text-align: right;
     padding: 5px;
     margin: 10px;
     font-size: 28px;
     border: 1px solid black;
+    height: 42px;
+    text-align: right;
+    align-content: center;
 }
 
 #equal {
